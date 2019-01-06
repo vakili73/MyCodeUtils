@@ -375,7 +375,7 @@ hellinger_distance_double(const double *p, const double *q, const npy_intp n)
     double s = 1.0;
 
     for (i = 0; i < n; ++i) {
-        s -= sqrt(p[i] * q[i])
+        s -= sqrt(p[i] * q[i]);
     }
 
     return sqrt(s);
