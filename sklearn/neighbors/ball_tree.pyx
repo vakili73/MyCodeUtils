@@ -21,6 +21,7 @@ VALID_METRICS = ['EuclideanDistance', 'SEuclideanDistance',
                  'SokalMichenerDistance', 'SokalSneathDistance',
                  'CorrelationDistance', 'CosineDistance',
                  'KullbackLeiblerDistance',
+                 'JensenShannonDistance', 'HellingerDistance',
                  'PyFuncDistance', 'HaversineDistance']
 
 

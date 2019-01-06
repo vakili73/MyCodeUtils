@@ -90,6 +90,8 @@ METRIC_MAPPING = {'euclidean': EuclideanDistance,
                   'cosine': CosineDistance,
                   'correlation': CorrelationDistance,
                   'kullbackleibler': KullbackLeiblerDistance,
+                  'jensenshannon': JensenShannonDistance,
+                  'hellinger': HellingerDistance,
                   'pyfunc': PyFuncDistance}
 
 
@@ -1100,6 +1102,45 @@ cdef class KullbackLeiblerDistance(DistanceMetric):
            d += tmp2 * log(tmp2 / tmp1)
 
        return d
+
+
+#------------------------------------------------------------
+# Jensen-Shannon Distance
+#  D(x, y) = dot(a, log(a / b))
+# [This is not a true metric, so we will leave it out.]
+#
+cdef class JensenShannonDistance(DistanceMetric):
+   cdef inline DTYPE_t dist(self, DTYPE_t* x1, DTYPE_t* x2,
+                            ITYPE_t size) nogil except -1:
+       cdef DTYPE_t d = 0
+       cdef DTYPE_t tmp1, tmp2, tmp
+
+       cdef np.intp_t i
+       for i in range(size):
+           tmp1 = fmax(FLT_EPSILON, x1[i])
+           tmp2 = fmax(FLT_EPSILON, x2[i])
+           tmp = fmax(FLT_EPSILON, 0.5 * (tmp1+tmp2))
+           d += 0.5 * (tmp1 * log(tmp1 / tmp))
+           d += 0.5 * (tmp2 * log(tmp2 / tmp))
+
+       return sqrt(d)
+
+
+#------------------------------------------------------------
+# Hellinger Distance
+#  D(x, y) = dot(a, log(a / b))
+# [This is not a true metric, so we will leave it out.]
+#
+cdef class HellingerDistance(DistanceMetric):
+   cdef inline DTYPE_t dist(self, DTYPE_t* x1, DTYPE_t* x2,
+                            ITYPE_t size) nogil except -1:
+       cdef DTYPE_t d = 1
+
+       cdef np.intp_t i
+       for i in range(size):
+           d -= sqrt(x1[i] * x2[i])
+
+       return sqrt(d)
 
 
 #------------------------------------------------------------

@@ -40,7 +40,8 @@ VALID_METRICS = dict(ball_tree=BallTree.valid_metrics,
                              'matching', 'minkowski', 'rogerstanimoto',
                              'russellrao', 'seuclidean', 'sokalmichener',
                              'sokalsneath', 'sqeuclidean', 'yule',
-                             'wminkowski', 'kullbackleibler']))
+                             'wminkowski', 'kullbackleibler',
+                             'jensenshannon', 'hellinger']))
 
 
 VALID_METRICS_SPARSE = dict(ball_tree=[],

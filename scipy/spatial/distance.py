@@ -84,6 +84,8 @@ __all__ = [
     'correlation',
     'cosine',
     'kullbackleibler',
+    'jensenshannon',
+    'hellinger',
     'dice',
     'directed_hausdorff',
     'euclidean',
@@ -134,8 +136,8 @@ def _args_to_kwargs_xdist(args, kwargs, metric, func_name):
     if (callable(metric) and metric not in [
             braycurtis, canberra, chebyshev, cityblock, correlation, cosine,
             dice, euclidean, hamming, jaccard, kulsinski, mahalanobis, kullbackleibler,
-            matching, minkowski, rogerstanimoto, russellrao, seuclidean,
-            sokalmichener, sokalsneath, sqeuclidean, yule, wminkowski]):
+            matching, minkowski, rogerstanimoto, russellrao, seuclidean, hellinger,
+            sokalmichener, sokalsneath, sqeuclidean, yule, wminkowski, jensenshannon]):
         raise TypeError('When using a custom metric arguments must be passed'
                         'as keyword (i.e., ARGNAME=ARGVALUE)')
 
@@ -751,6 +753,21 @@ def kullbackleibler(u, v):
     v = np.clip(v, eps, None)
     d = u * np.log(u / v) + v * np.log(v / u)
     return np.sum(d)
+
+
+def jensenshannon(u, v):
+    eps = np.finfo(np.float32).eps
+    u = np.clip(u, eps, None)
+    v = np.clip(v, eps, None)
+    m = np.clip(0.5 * (u + v), eps, None)
+    d = 0.5 * (u * np.log(u / m) + v * np.log(v / m))
+    return np.sqrt(np.sum(d))
+
+
+def hellinger(u, v):
+    d = 1
+    d -= np.sum(np.sqrt(u * v))
+    return np.sqrt(d)
 
 
 def hamming(u, v, w=None):
@@ -1583,6 +1600,8 @@ _METRICS = {
     'correlation': MetricInfo(aka=['correlation', 'co']),
     'cosine': MetricInfo(aka=['cosine', 'cos']),
     'kullbackleibler': MetricInfo(aka=['kullbackleibler', 'kl']),
+    'jensenshannon': MetricInfo(aka=['jensenshannon']),
+    'hellinger': MetricInfo(aka=['hellinger']),
     'dice': MetricInfo(aka=['dice'], types=['bool']),
     'euclidean': MetricInfo(aka=['euclidean', 'euclid', 'eu', 'e']),
     'hamming': MetricInfo(aka=['matching', 'hamming', 'hamm', 'ha', 'h'],

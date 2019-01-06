@@ -87,6 +87,7 @@ DEFINE_WRAP_CDIST(hamming, double)
 DEFINE_WRAP_CDIST(jaccard, double)
 DEFINE_WRAP_CDIST(kullbackleibler, double)
 DEFINE_WRAP_CDIST(jensenshannon, double)
+DEFINE_WRAP_CDIST(hellinger, double)
 DEFINE_WRAP_CDIST(sqeuclidean, double)
 
 DEFINE_WRAP_CDIST(dice, char)
@@ -292,6 +293,7 @@ DEFINE_WRAP_PDIST(hamming, double)
 DEFINE_WRAP_PDIST(jaccard, double)
 DEFINE_WRAP_PDIST(kullbackleibler, double)
 DEFINE_WRAP_PDIST(jensenshannon, double)
+DEFINE_WRAP_PDIST(hellinger, double)
 DEFINE_WRAP_PDIST(sqeuclidean, double)
 
 DEFINE_WRAP_PDIST(dice, char)
@@ -516,6 +518,7 @@ static PyMethodDef _distanceWrapMethods[] = {
   {"cdist_jaccard_bool_wrap", cdist_jaccard_char_wrap, METH_VARARGS},
   {"cdist_kullbackleibler_double_wrap", cdist_kullbackleibler_double_wrap, METH_VARARGS},
   {"cdist_jensenshannon_double_wrap", cdist_jensenshannon_double_wrap, METH_VARARGS},
+  {"cdist_hellinger_double_wrap", cdist_hellinger_double_wrap, METH_VARARGS},
   {"cdist_kulsinski_bool_wrap", cdist_kulsinski_char_wrap, METH_VARARGS},
   {"cdist_mahalanobis_double_wrap", cdist_mahalanobis_double_wrap, METH_VARARGS | METH_KEYWORDS},
   {"cdist_minkowski_double_wrap", cdist_minkowski_double_wrap, METH_VARARGS | METH_KEYWORDS},
@@ -540,6 +543,7 @@ static PyMethodDef _distanceWrapMethods[] = {
   {"pdist_jaccard_bool_wrap", pdist_jaccard_char_wrap, METH_VARARGS},
   {"pdist_kullbackleibler_double_wrap", pdist_kullbackleibler_double_wrap, METH_VARARGS},
   {"pdist_jensenshannon_double_wrap", pdist_jensenshannon_double_wrap, METH_VARARGS},
+  {"pdist_hellinger_double_wrap", pdist_hellinger_double_wrap, METH_VARARGS},
   {"pdist_kulsinski_bool_wrap", pdist_kulsinski_char_wrap, METH_VARARGS},
   {"pdist_mahalanobis_double_wrap", pdist_mahalanobis_double_wrap, METH_VARARGS | METH_KEYWORDS},
   {"pdist_minkowski_double_wrap", pdist_minkowski_double_wrap, METH_VARARGS | METH_KEYWORDS},

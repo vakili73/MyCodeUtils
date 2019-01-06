@@ -369,6 +369,20 @@ jensenshannon_distance_double(const double *p, const double *q, const npy_intp n
 
 
 static NPY_INLINE double
+hellinger_distance_double(const double *p, const double *q, const npy_intp n)
+{
+    npy_intp i;
+    double s = 1.0;
+
+    for (i = 0; i < n; ++i) {
+        s -= sqrt(p[i] * q[i])
+    }
+
+    return sqrt(s);
+}
+
+
+static NPY_INLINE double
 seuclidean_distance(const double *var, const double *u, const double *v,
                     const npy_intp n)
 {
@@ -734,6 +748,7 @@ DEFINE_CDIST(hamming, double)
 DEFINE_CDIST(jaccard, double)
 DEFINE_CDIST(kullbackleibler, double)
 DEFINE_CDIST(jensenshannon, double)
+DEFINE_CDIST(hellinger, double)
 DEFINE_CDIST(sqeuclidean, double)
 
 DEFINE_CDIST(dice, char)
@@ -773,6 +788,7 @@ DEFINE_PDIST(hamming, double)
 DEFINE_PDIST(jaccard, double)
 DEFINE_PDIST(kullbackleibler, double)
 DEFINE_PDIST(jensenshannon, double)
+DEFINE_PDIST(hellinger, double)
 DEFINE_PDIST(sqeuclidean, double)
 
 DEFINE_PDIST(dice, char)
